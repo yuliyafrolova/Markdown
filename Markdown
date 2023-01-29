@@ -1,0 +1,103 @@
+# write your code here
+list_of_formatters = ["plain", "bold", "italic", "header", "link", "inline-code", "new-line"]
+
+def form_header():
+    text = input('Text:')
+    result = level * '#' + " " + text
+    list1.append(result)
+def form_plain():
+    text = input('Text: ')
+    result = text
+    list1.append(result)
+def form_bold():
+    text = input('Text: ')
+    result = '**' + text + '**'
+    list1.append(result)
+def form_italic():
+    text = input('Text: ')
+    result = '*' + text + '*'
+    list1.append(result)
+def form_code():
+    text = input('Text: ')
+    result = '`' + text + "`"
+    list1.append(result)
+def form_line():
+    result = '\n'
+def form_link():
+    label = input('Label: ')
+    url = input('URL: ')
+    result = '[' + label + ']' + '(' + url + ')'
+    list1.append(result)
+def form_list():
+    a = '\n'
+    if formatter == 'ordered-list':
+        for i in range (1, rows + 1):
+            name = input(f'Row #{i}:')
+            result = str(i) + '. ' + name + a
+            list1.append(result)
+            print(''.join(list1))
+    elif formatter == 'unordered-list':
+        for i in range (1, rows + 1):
+            name = input(f'Row #{i}:')
+            result = '* ' + name + a
+            list1.append(result) 
+            print(''.join(list1))
+  
+
+    
+list1 = []
+while True:
+    
+    formatter = input("Choose a formatter:")
+    if formatter == 'header':
+        while True:
+            level = int(input('Level:'))
+            if level > 6:
+                print('The level should be within the range of 1 to 6')
+                continue
+            else:
+                break
+        text = input('Text:')
+        print (level * '#' + " " + text + '\n')
+        
+        
+    elif formatter == 'plain':
+        form_plain()
+        print(''.join(list1))
+    elif formatter == 'bold':
+        form_bold()
+        print(''.join(list1))
+    elif formatter == 'italic':
+        form_italic()
+        print(''.join(list1))
+    elif formatter == 'inline-code':
+        form_code()
+        print(''.join(list1))
+    elif formatter == 'new-line':
+        print(''.join(list1) + '\n')
+    elif formatter == 'link':
+        form_link()
+        print(''.join(list1))
+    elif formatter == 'ordered-list' or formatter == 'unordered-list':
+        while True:
+            rows = int(input('Number of rows: '))
+            if rows <= 0:
+                print('The number of rows should be greater than zero')
+                continue
+            else:
+                form_list()
+                break
+    elif formatter == "!help":
+        print('Available formatters: plain bold italic header link inline-code ordered-list unordered-list new-line \nSpecial commands: !help !done')
+    elif formatter == "!done":
+        file = open("output.md", "w")
+        for element in list1:
+            file.write(element + "\n")
+            file.close()
+        break
+    elif formatter not in list_of_formatters :
+        print('Unknown formatting type or command')
+    else: 
+        continue
+
+ 
